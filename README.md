@@ -1,29 +1,28 @@
-DomainSRV - DNS SRV Record Enumerator
-<img width="837" height="739" alt="Screenshot 2025-09-22 224258" src="https://github.com/user-attachments/assets/80dd169a-7cee-4010-bc48-24eb9543eabd" />
+# DomainSRV - DNS SRV Record Enumerator
 
-DomainSRV is a fast, parallelized Bash tool designed for enumerating DNS SRV (Service) records from a Domain Controller or DNS server. Tailored for security researchers, penetration testers, and network administrators, it offers a robust, tunable solution to discover and analyze SRV records in Active Directory (AD) environments or other DNS setups.
-Features
+![DomainSRV Banner](<img width="837" height="739" alt="Screenshot 2025-09-22 224258" src="https://github.com/user-attachments/assets/982f45e9-6485-44b3-9dbe-954a1b58a31b" />
+) <!-- Replace with the actual uploaded banner image URL -->
 
-Parallel Processing: Executes concurrent SRV queries with configurable worker threads for efficiency.
-Enumeration Modes:
+**DomainSRV** is a fast, parallelized Bash tool designed for enumerating DNS SRV (Service) records from a Domain Controller or DNS server. Tailored for security researchers, penetration testers, and network administrators, it offers a robust, tunable solution to discover and analyze SRV records in Active Directory (AD) environments or other DNS setups.
 
-Common AD SRV records (e.g., _ldap._tcp, _kerberos._tcp).
-Bruteforce common service prefixes (e.g., http, sip, smtp) for both TCP and UDP.
-Comprehensive IANA SRV list enumeration.
-Custom SRV label queries for targeted scans.
-DNS zone transfer (AXFR) support.
+## Features
+- **Parallel Processing**: Executes concurrent SRV queries with configurable worker threads for efficiency.
+- **Enumeration Modes**:
+  - Common AD SRV records (e.g., `_ldap._tcp`, `_kerberos._tcp`).
+  - Bruteforce common service prefixes (e.g., `http`, `sip`, `smtp`) for both TCP and UDP.
+  - Comprehensive IANA SRV list enumeration.
+  - Custom SRV label queries for targeted scans.
+  - DNS zone transfer (AXFR) support.
+- **Target Resolution**: Resolves discovered SRV targets to IP addresses and infers /24 subnets.
+- **Logging & Reporting**: Saves results to organized files and supports detailed report exports.
+- **User Interface**: Features a colorized, hacker-style interface with a custom ASCII banner.
+- **Robust Design**: Includes strict error handling and runtime dependency checks.
 
-
-Target Resolution: Resolves discovered SRV targets to IP addresses and infers /24 subnets.
-Logging & Reporting: Saves results to organized files and supports detailed report exports.
-User Interface: Features a colorized, hacker-style interface with a custom ASCII banner.
-Robust Design: Includes strict error handling and runtime dependency checks.
-
-Installation
-
-Clone the repository:
-bashgit clone https://github.com/<your-username>/domainsrv.git
-cd domainsrv
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/<your-username>/domainsrv.git
+   cd domainsrv
 
 Ensure dependencies are installed:
 
@@ -98,29 +97,22 @@ ASCII banner designed with a classic hacker aesthetic.
 
 
 Developed with ❤️ by [JY00X3]
+text### Notes for Implementation
+1. **Banner Image**:
+   - Replace the placeholder URL (`<img width="837" height="739" alt="Screenshot 2025-09-22 224258" src="https://github.com/user-attachments/assets/4ccebe61-3665-4c69-9fb4-b4b68f3527d6" />
+`) with the actual URL of the uploaded banner image. Upload the image to your GitHub repository (e.g., in a `docs/` folder) and reference it like `![DomainSRV Banner](docs/banner.png)`. Ensure the dimensions (e.g., 800x400) match the aspect ratio of your provided banner.
 
-Notes for Implementation
+2. **Customization**:
+   - Replace `<your-username>` with your GitHub username.
+   - Update `[Your Name]` with your actual name or preferred handle.
 
-Banner Image:
+3. **Additional Files**:
+   - Add a `LICENSE` file to the repository (e.g., copy a MIT License template).
+   - Consider including a `CHANGELOG.md` for version history.
+   - Add a `.gitignore` file to exclude temporary files (e.g., `/tmp/domainsrv_*`).
 
-Replace the placeholder URL (https://via.placeholder.com/800x400.png?text=DomainSRV+Banner) with the actual URL of the uploaded banner image. You can upload the image to your GitHub repository (e.g., in a docs/ folder) and reference it like ![DomainSRV Banner](docs/banner.png).
-Ensure the image dimensions (e.g., 800x400) match the aspect ratio of the provided banner for best display.
+4. **Testing**:
+   - Verify the README content aligns with the script's functionality.
+   - Test the rendered README on GitHub to ensure proper formatting.
 
-
-Customization:
-
-Replace <your-username> with your GitHub username.
-Update [Your Name] with your actual name or preferred handle.
-
-
-Additional Files:
-
-Add a LICENSE file to the repository.
-Consider including a CHANGELOG.md for version history.
-Add a .gitignore file to exclude temporary files (e.g., /tmp/domainsrv_*).
-
-
-Testing:
-
-Verify the script works with the banner and menu as shown in the image.
-Test on various Linux distributions to ensure compatibility.
+This `README.md` provides a professional and complete overview of **DomainSRV**, ready to be pas
