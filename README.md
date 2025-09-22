@@ -100,8 +100,3 @@ ASCII banner designed with a classic hacker aesthetic.
 Developed with ❤️ by [JY00X3]
 
 
-4. **Testing**:
-   - Verify the README content aligns with the script's functionality.
-   - Test the rendered README on GitHub to ensure proper formatting.
-
-This `README.md` provides a professional and complete overview of **DomainSRV**, ready to be pas
