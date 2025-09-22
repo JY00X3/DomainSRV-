@@ -1,168 +1,121 @@
+GitHub README
+Below is a suggested README for your GitHub repository to present DomainSRV professionally.
+markdown# DomainSRV - DNS SRV Record Enumerator
 
-# DomainSRV
+![DomainSRV Banner](https://via.placeholder.com/800x200.png?text=DomainSRV+Banner) <!-- Replace with actual banner image if available -->
 
-**DomainSRV** is a professional, lab-focused SRV record enumeration toolkit for Active Directory and network reconnaissance.  
-It performs fast, parallel SRV lookups (tunable concurrency), supports AXFR attempts, common AD/service-focused scans, brute-prefix probing, custom queries, and a full IANA-backed SRV enumeration mode (lab-only). Results are resolved, grouped, logged and exportable for post-processing and reporting.
+**DomainSRV** is a fast, parallelized Bash tool for enumerating DNS SRV (Service) records from a Domain Controller or DNS server. Designed for security researchers, penetration testers, and network administrators, it provides a flexible and robust way to discover and analyze SRV records in Active Directory environments or other DNS setups.
 
-> ⚠️ **For authorized use only.** DomainSRV includes noisy actions (AXFR, large-scale IANA scans). Use exclusively in labs or environments where you have explicit permission.
-
----
-
-## Key features
-
-- Parallel SRV enumeration using configurable worker/concurrency settings.
-- Multiple operation modes:
-  - AXFR (zone transfer, explicit confirmation)
-  - Common AD SRV queries (LDAP, Kerberos, GC, etc.)
-  - Brute-prefix SRV probing (useful to find unexpected services)
-  - Custom SRV lists (interactive)
-  - Full IANA SRV enumeration (heavy; lab-only)
-- Automatic resolution of discovered targets and /24 subnet inference.
-- Timestamped session directories: `found.txt`, `notfound.txt`, `resolved.csv`, `session.log`.
-- Exportable human-readable reports.
-- Safe-by-default settings (short DNS timeouts, confirmations for noisy actions).
-- Fallbacks: prefers `dnspython` when available, otherwise falls back to `dig` for compatibility.
-- Useful for CRTP practice labs, AD recon, red-team reconnaissance (authorized), and teaching.
-
----
-
-## Screenshots / Example output (terminal)
-
-
-
-[FOUND] _ldap._tcp.example.local -> 0 100 389 dc01.example.local.
-[NOTFOUND] _mssql._tcp.example.local
-[FOUND] _http._tcp.web.example.local -> 0 5 80 web01.example.local.
-Resolved: web01.example.local -> 192.168.100.10 (subnet: 192.168.100.0/24)
-Session saved: /tmp/domainsrv_example.local_20250922-143512/
-
-
----
-
-## Requirements
-
-- Python 3.8+ (for the Python edition) *or* Bash + `dig` (for the shell edition)
-- Recommended (Python): `dnspython` (`pip install dnspython`) — the script will use `dig` if dnspython is not present.
-- Utilities (if using the shell flavor): `dig`, `curl`, `xargs`, `awk`, `sed`, `nmap` (optional)
-- Designed for Linux-based environments (Kali, Ubuntu, etc.)
-
----
+## Features
+- **Parallel Queries**: Concurrent SRV enumeration with configurable worker threads.
+- **Enumeration Modes**:
+  - Common Active Directory SRVs (e.g., `_ldap._tcp`, `_kerberos._tcp`).
+  - Bruteforce common service prefixes (e.g., `http`, `sip`, `smtp`).
+  - Full IANA SRV list enumeration for exhaustive discovery.
+  - Custom SRV label queries for targeted scans.
+  - DNS zone transfer (AXFR) support.
+- **Target Resolution**: Resolves SRV targets to IPs and infers /24 subnets.
+- **Logging & Reporting**: Saves results to organized files and supports report exports.
+- **Hacker-Style Interface**: Colorized output with a "hooded hacker" ASCII banner.
+- **Robust Design**: Strict error handling and dependency checks for reliability.
 
 ## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/<your-username>/domainsrv.git
+   cd domainsrv
 
-**Quick (Python script):**
+Ensure dependencies are installed:
 
-```bash
-# place DomainSRV.py in your PATH or a repo folder and make executable:
-chmod +x DomainSRV.py
-./DomainSRV.py
-
-
-Install dnspython (recommended):
-
-python3 -m pip install --user dnspython
+dig, xargs, awk, sed, curl
+On Debian/Ubuntu: sudo apt-get install dnsutils coreutils curl
 
 
-Shell script version:
-
-Save DomainSRV.sh, make executable and run:
-
-chmod +x DomainSRV.sh
-./DomainSRV.sh
-
-Usage examples
-Interactive (recommended)
-
-Run the script and follow prompts:
-
-./DomainSRV.py
-# Enter DNS server, domain, choose concurrency, then select actions from menu
-
-Non-interactive (headless/use-case)
-
-(If you add a headless mode) call with flags:
-
-python3 DomainSRV.py --server 192.168.100.83 --domain example.local --mode common --workers 30 --export ./report.txt
-
-Typical workflow
-
-Start DomainSRV and set workers (e.g., 10–50 depending on lab capacity).
-
-Run Enumerate common AD SRVs to quickly find LDAP/Kerberos/GC endpoints.
-
-Use Resolve discovered targets to get IPs and infer subnets.
-
-Optionally run Brute-prefix or Custom queries to expand coverage.
-
-Save/export the session report for documentation.
-
-Output & session folders
-
-By default DomainSRV stores session artifacts in a timestamped directory under /tmp, for example:
-
-/tmp/domainsrv_example.local_20250922-143512/
-  ├─ found.txt         # one-line per found SRV record
-  ├─ notfound.txt      # probed but not found
-  ├─ resolved.csv      # host,ip pairs for resolved targets
-  └─ session.log       # timestamped log of actions and results
+Make the script executable:
+bashchmod +x domainsrv.sh
 
 
-export_report() will combine these into a single human-readable file.
+Usage
+bash./domainsrv.sh
 
-Safety, ethics & best practices
+Enter the target DNS server, domain (FQDN), and number of workers.
+Select from the interactive menu:
 
-Only run DomainSRV where you are authorized. Attempting AXFR or mass enumeration against external/production DNS servers may be considered hostile activity.
+1 Attempt AXFR (zone transfer)
+2 Enumerate common AD SRVs
+3 Bruteforce common prefixes
+4 Enumerate all IANA SRVs
+5 Custom SRV queries
+6 Resolve discovered targets
+7 Show session summary
+8 Export report
+9 Change server/domain/workers
+0 Exit
 
-Use conservative worker counts on shared networks (start at 5–10). Increase only in isolated lab networks.
 
-DomainSRV shortens DNS timeouts to speed up failed lookups; if you run against slow DNS servers, increase timeouts to avoid false negatives.
 
-Keep full IANA enumeration limited to controlled lab environments.
+Example
+bash$ ./domainsrv.sh
+Enter DNS server IP/hostname: 192.168.1.10
+Enter DNS domain (FQDN): example.com
+Workers (concurrency) [default 20]: 20
+
+Select option 2 to enumerate AD SRVs.
+Results are saved to /tmp/domainsrv_example.com_<timestamp>/.
+
+Output
+
+Session Directory: /tmp/domainsrv_<domain>_<timestamp>/
+
+found.txt: Discovered SRV records.
+notfound.txt: SRV queries with no results.
+session.log: Detailed query logs.
+resolved.csv: Resolved IPs (if resolved).
+<domain>-axfr.txt: Zone transfer results (if applicable).
+
+
+
+Requirements
+
+Tools: dig, xargs, awk, sed, curl
+OS: Linux/Unix with Bash
+Permissions: Network access to the DNS server; optional root for some setups.
+
+Notes
+
+Use responsibly and only on systems you are authorized to test.
+Full IANA enumeration (option 4) can generate significant network traffic.
+AXFR (option 1) may be noisy and is often restricted by DNS servers.
 
 Contributing
-
-Contributions welcome. Some ideas for improvements:
-
-Add a formal headless CLI (--server, --domain, --mode, --workers, --export).
-
-Add CSV/JSON outputs and a Markdown/HTML report export.
-
-BloodHound integration or SPN extraction for Kerberos workflow.
-
-Add adaptive throttling/backoff to avoid DNS overload.
-
-To contribute:
-
-Fork the repo
-
-Create a feature branch feature/your-feature
-
-Submit PR with tests and README updates
-
+Contributions are welcome! Please submit issues or pull requests for bug fixes, features, or improvements.
 License
+This project is licensed under the MIT License. See LICENSE for details.
+Acknowledgments
 
-Suggested: MIT License (permissive and commonly used for tooling).
-
-MIT License
-Copyright (c) YEAR YOURNAME
-Permission is hereby granted...
+Inspired by the need for efficient SRV record enumeration in penetration testing.
+ASCII art designed in the classic "drew-style" for a hacker aesthetic.
 
 
-(Replace with your chosen license and include LICENSE file.)
+Built with ❤️ by [JY00X3]
+text### Notes for GitHub
+1. **Repository Setup**:
+   - Create a GitHub repository named `domainsrv`.
+   - Add the script as `domainsrv.sh`.
+   - Include a `LICENSE` file (e.g., MIT License).
+   - Optionally, add a banner image to enhance the README.
 
-Acknowledgements & Credits
+2. **Customization**:
+   - Replace `<your-username>` with your GitHub username.
+   - Update the placeholder banner image URL with a custom image if desired.
+   - Add your name or handle in the "Built by" section.
 
-Inspired by common AD recon workflows and pentesting labs (CRTP practice).
+3. **Additional Files**:
+   - Consider adding a `CHANGELOG.md` for version tracking.
+   - Include a `.gitignore` to exclude temporary files (e.g., `/tmp/domainsrv_*`).
 
-Banner art and UX inspired by classic pentest tools and terminal aesthetics.
+4. **Testing**:
+   - Test the script in a safe environment (e.g., a lab) before deployment.
+   - Ensure the README instructions are clear and accurate.
 
-Uses dnspython when available; otherwise falls back to dig.
-
-If you want, I can:
-
-produce a ready-to-add LICENSE file (MIT or Apache 2.0),
-
-generate a minimal setup.py / installer, or
-
-create the --headless CLI and sample CI workflow for the repo.
-
+This description and README should effectively showcase **DomainSRV** as a professional and pow
