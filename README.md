@@ -1,7 +1,8 @@
 # DomainSRV - DNS SRV Record Enumerator
 
-![DomainSRV Banner](<img width="837" height="739" alt="Screenshot 2025-09-22 224258" src="https://github.com/user-attachments/assets/982f45e9-6485-44b3-9dbe-954a1b58a31b" />
-) <!-- Replace with the actual uploaded banner image URL -->
+<img width="837" height="739" alt="Screenshot 2025-09-22 224258" src="https://github.com/user-attachments/assets/1a9eb4b4-6493-4ead-81cf-5e18b02e49fb" />
+
+
 
 **DomainSRV** is a fast, parallelized Bash tool designed for enumerating DNS SRV (Service) records from a Domain Controller or DNS server. Tailored for security researchers, penetration testers, and network administrators, it offers a robust, tunable solution to discover and analyze SRV records in Active Directory (AD) environments or other DNS setups.
 
@@ -97,19 +98,7 @@ ASCII banner designed with a classic hacker aesthetic.
 
 
 Developed with ❤️ by [JY00X3]
-text### Notes for Implementation
-1. **Banner Image**:
-   - Replace the placeholder URL (`<img width="837" height="739" alt="Screenshot 2025-09-22 224258" src="https://github.com/user-attachments/assets/4ccebe61-3665-4c69-9fb4-b4b68f3527d6" />
-`) with the actual URL of the uploaded banner image. Upload the image to your GitHub repository (e.g., in a `docs/` folder) and reference it like `![DomainSRV Banner](docs/banner.png)`. Ensure the dimensions (e.g., 800x400) match the aspect ratio of your provided banner.
 
-2. **Customization**:
-   - Replace `<your-username>` with your GitHub username.
-   - Update `[Your Name]` with your actual name or preferred handle.
-
-3. **Additional Files**:
-   - Add a `LICENSE` file to the repository (e.g., copy a MIT License template).
-   - Consider including a `CHANGELOG.md` for version history.
-   - Add a `.gitignore` file to exclude temporary files (e.g., `/tmp/domainsrv_*`).
 
 4. **Testing**:
    - Verify the README content aligns with the script's functionality.
