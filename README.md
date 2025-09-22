@@ -2,7 +2,8 @@ GitHub README
 Below is a suggested README for your GitHub repository to present DomainSRV professionally.
 markdown# DomainSRV - DNS SRV Record Enumerator
 
-![DomainSRV Banner](https://via.placeholder.com/800x200.png?text=DomainSRV+Banner) <!-- Replace with actual banner image if available -->
+![DomainSRV Banner](<img width="837" height="738" alt="image" src="https://github.com/user-attachments/assets/6d10d2d6-0647-4812-a549-0f9589ea0f10" />
+) <!-- Replace with actual banner image if available -->
 
 **DomainSRV** is a fast, parallelized Bash tool for enumerating DNS SRV (Service) records from a Domain Controller or DNS server. Designed for security researchers, penetration testers, and network administrators, it provides a flexible and robust way to discover and analyze SRV records in Active Directory environments or other DNS setups.
 
